@@ -1,7 +1,11 @@
 # Java Webflux OAuth Sample
 
-This sample application uses Spring Boot and Spring Security 5 on the back end with the
-native OAuth 2.0 client support. 
+This sample demonstrates OAuth 2.0 Login using the Authorization Code grant
+and Blizzard's OAuth Provider service. In the backend, it uses Spring Boot and Spring Security 5 on the back end with the
+native OAuth 2.0 client support.
+
+This would be useful if you wanted to allow users to log into your site using
+their Battle.net account, then perform actions on behalf of that user (obtain profile data, etc).
 
 ## About This Sample
 This sample relies significantly on the native Spring Boot conventions to set up your OAuth client
