@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+  <title>StarCraft 2 Profile</title>
+  <meta charset="utf-8"/>
+</head>
+<body>
+<div style="float: right">
+  <div style="float:left">
+    <span style="font-weight:bold">User: </span><span th:text="${userName}"></span>
+  </div>
+  <div style="float:none">&nbsp;</div>
+  <div style="float:right">
+    <a th:href="@{/}">Home</a>
+  </div>
+</div>
+<h1>StarCraft 2 Profile Info</h1>
+<div>
+
+  Display Name: <span th:text="${displayName}"></span>
+  <div>&nbsp;</div>
+  Achievement Points: <span th:text="${totalAchievementPoints}"></span>
+  <div>&nbsp;</div>
+  Wings Of Liberty Campaign Completed: <span th:text="${wolDifficulty}"></span>
+  <div>&nbsp;</div>
+  Heart of the Swarm Campaign Completed: <span th:text="${hotsDifficulty}"></span>
+
+</div>
+</body>
+</html>

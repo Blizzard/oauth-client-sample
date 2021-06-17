@@ -7,12 +7,16 @@ spring:
             client-id:
             client-secret:
             client-name: Battle.net OAuth Sample Client
-            scope: openid
+            scope: openid,sc2.profile
         provider:
           blizzard:
             issuer-uri: https://us.battle.net/oauth
   thymeleaf:
     cache: false
+
+blizzard:
+  api:
+    host: https://us.api.blizzard.com
 
 logging:
   level:
