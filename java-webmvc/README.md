@@ -42,6 +42,11 @@ in the developer portal as only these URIs will be treated as value return URIs.
 
 ## Accessing API Resources
 
+Now that we have obtained a valid authorization for the user, we can use this to make API calls to obtain some user information.
+When configured properly, the Spring HTTP [WebClient] will add an Authorization header containing a bearer token (Access
+Token) for the currently authorized user. This will be used to authenticate against Blizzard APIs. This sample
+interacts with some basic information using the [SC2 APIs].
+
 ### Reference Documentation
 
 For further reference, please consider the following sections:
@@ -59,3 +64,5 @@ The following guides illustrate how to use some features concretely:
 * [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
 
 [application.yml]: src/main/resources/application.yml
+[SC2 APIs]: https://develop.battle.net/documentation/starcraft-2/community-apis
+[WebClient]: src/main/java/com/blizzard/javawebmvcoauthsample/WebClientConfig.java

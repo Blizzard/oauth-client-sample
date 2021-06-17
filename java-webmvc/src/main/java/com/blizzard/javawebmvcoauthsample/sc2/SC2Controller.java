@@ -1,4 +1,4 @@
-package com.blizzard.javawebfluxoauthsample.sc2;
+package com.blizzard.javawebmvcoauthsample.sc2;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,7 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import reactor.core.publisher.Mono;
+import com.blizzard.javawebmvcoauthsample.sc2.model.AccountResponse;
+import com.blizzard.javawebmvcoauthsample.sc2.model.ProfileResponse;
 
 /**
  * Controller that gathers information about the logged in account's StarCraft 2 profile, adds the necessary values to
@@ -28,25 +29,20 @@ public class SC2Controller {
 	private SC2ProfileService sc2ProfileService;
 
 	@GetMapping
-	public Mono<String> getProfile(
+	public String getProfile(
 			Model model,
 			@RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient authorizedClient,
 			@AuthenticationPrincipal OAuth2User oauth2User
 	) {
 		final String accountId = authorizedClient.getPrincipalName();
-		return sc2ProfileService.getAccount(accountId)
-				.flatMap(accountResponse -> sc2ProfileService.getProfile(
-						accountResponse.profileId(),
-						accountResponse.realmId(),
-						accountResponse.regionId()))
-				.map(profileResponse -> {
-					model.addAttribute("userName", oauth2User.getName());
-					model.addAttribute("displayName", profileResponse.summary().displayName());
-					model.addAttribute("totalAchievementPoints", profileResponse.summary().totalAchievementPoints());
-					model.addAttribute("wolDifficulty", profileResponse.campaign().difficultyCompleted().wingsOfLiberty());
-					model.addAttribute("hotsDifficulty", profileResponse.campaign().difficultyCompleted().heartOfTheSwarm());
-					return "sc2";
-				});
+		final AccountResponse account = sc2ProfileService.getAccount(accountId);
+		final ProfileResponse profile = sc2ProfileService.getProfile(account.profileId(), account.realmId(), account.regionId());
+		model.addAttribute("userName", oauth2User.getName());
+		model.addAttribute("displayName", profile.summary().displayName());
+		model.addAttribute("totalAchievementPoints", profile.summary().totalAchievementPoints());
+		model.addAttribute("wolDifficulty", profile.campaign().difficultyCompleted().wingsOfLiberty());
+		model.addAttribute("hotsDifficulty", profile.campaign().difficultyCompleted().heartOfTheSwarm());
+		return "sc2";
 	}
 
 }
