@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	LogoutSuccessHandler logoutSuccessHandler() {
 		return (request, response, authentication) -> {
-			final UriComponents logoutRedirect = UriComponentsBuilder.fromHttpUrl("https://us.battle.net")
+			final UriComponents logoutRedirect = UriComponentsBuilder.fromHttpUrl("https://battle.net")
 					.pathSegment("login", "logout")
 					.queryParam("ref", "http://localhost:8080") // replace this with the actual endpoint of your service
 					.build();

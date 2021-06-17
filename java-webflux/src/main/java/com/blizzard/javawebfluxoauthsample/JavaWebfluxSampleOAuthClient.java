@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JavaWebfluxApplication {
+public class JavaWebfluxSampleOAuthClient {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JavaWebfluxApplication.class, args);
+		SpringApplication.run(JavaWebfluxSampleOAuthClient.class, args);
 	}
 
 }
