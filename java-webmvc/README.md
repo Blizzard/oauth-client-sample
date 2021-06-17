@@ -7,6 +7,18 @@ native OAuth 2.0 client support.
 This sample relies significantly on the native Spring Boot conventions to set up your OAuth client
 and OAuth login. This also uses Spring Web MVC to perform web requests (as opposed to Spring Webflux).
 
+Each class and method should have documentation explaining the important information.
+
+## Running
+This sample can be imported into an IDE and run using the `main` method in `JavaWebMVCSampleOAuthClient`.
+To use the command line, `mvn spring-boot:run` or build the jar file and run with `mvn package` and
+`java -jar target/*.jar`. This requires both Maven and Java to be installed locally. This sample
+uses Java 16, but can be compiled against Java 8/11 by changing the value in the `pom.xml`.
+
+This sample runs on `localhost:8080` and all documentation and code will reflect as such. To run
+on a different host or port, you will need to update the OAuth Client Redirect URIs using the
+developer portal.
+
 ## Enable OAuth 2 Login
 Spring Security 5 provides native OAuth 2 client support and OAuth 2 login. All the necessary
 configuration can be found in the [application.yml] properties file, except for your OAuth client
