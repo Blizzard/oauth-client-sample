@@ -1,0 +1,21 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          blizzard:
+            client-id:
+            client-secret:
+            client-name: Battle.net OAuth Sample Client
+            scope: openid
+        provider:
+          blizzard:
+            issuer-uri: https://us.battle.net/oauth
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
