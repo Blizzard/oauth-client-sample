@@ -9,8 +9,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 /**
  * Configuration for the HTTP client, used to interact with REST APIs. The {@code ServletOAuth2AuthorizedClientExchangeFilterFunction}
- * will discover the currently logged in user and add an Authorization header to the request with a bearer token.
- * Increasing the buffer size is required in order to interface with some of the APIs.
+ * will discover the currently logged-in user and add an Authorization header to the request with a bearer token.
+ * Increasing the buffer size is required in order to interface with some APIs.
  *
  * @author tygregory
  * @since 6/17/2021
@@ -28,7 +28,7 @@ public class WebClientConfig {
 		oauth.setDefaultOAuth2AuthorizedClient(true);
 		return WebClient.builder()
 				.codecs(clientCodecConfigurer -> clientCodecConfigurer.defaultCodecs()
-						.maxInMemorySize(16 * 1024 * 1024))
+						.maxInMemorySize(16 * 1024 * 1024)) // the size of the sc2 profile data exceeds the default max memory size
 				.filter(oauth);
 	}
 

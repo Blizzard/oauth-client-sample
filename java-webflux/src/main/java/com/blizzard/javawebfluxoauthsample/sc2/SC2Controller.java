@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 
 /**
  * Controller that gathers information about the logged in account's StarCraft 2 profile, adds the necessary values to
- * the model, then renders the sc2 template. Obtains the account ID from the logged in user in order to fetch the
+ * the model, then renders the sc2 template. Obtains the account ID from the logged-in user in order to fetch the
  * StarCraft 2 profile data.
  *
  * @author tygregory

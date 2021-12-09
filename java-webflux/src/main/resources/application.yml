@@ -10,7 +10,7 @@ spring:
             scope: openid,sc2.profile
         provider:
           blizzard:
-            issuer-uri: https://us.battle.net/oauth
+            issuer-uri: https://oauth.battle.net
   thymeleaf:
     cache: false
 

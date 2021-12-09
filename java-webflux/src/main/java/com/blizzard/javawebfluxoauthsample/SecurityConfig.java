@@ -23,7 +23,7 @@ public class SecurityConfig {
 	/**
 	 * Creates a logout handler to invoke the Battle.net logout endpoint. This will ensure the user is actually logged
 	 * out of their Battle.net account before returning to the website. If this is not done, Battle.net login will still
-	 * have an active session for the user and they will be auto logged into that account.
+	 * have an active session for the user, and they will be auto logged into that account.
 	 */
 	RedirectServerLogoutSuccessHandler logoutSuccessHandler() {
 		RedirectServerLogoutSuccessHandler successHandler = new RedirectServerLogoutSuccessHandler();
@@ -43,10 +43,10 @@ public class SecurityConfig {
 	@Bean
 	public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
 		http
-				.authorizeExchange().anyExchange().authenticated()
-				.and().oauth2Client()
+				.authorizeExchange(authorizeExchangeSpec -> authorizeExchangeSpec.anyExchange().authenticated())
+				.oauth2Client()
 				.and().oauth2Login()
-				.and().logout().logoutSuccessHandler(logoutSuccessHandler());
+				.and().logout(logoutSpec -> logoutSpec.logoutSuccessHandler(logoutSuccessHandler()));
 		return http.build();
 	}
 

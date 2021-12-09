@@ -22,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	/**
 	 * Creates a logout handler to invoke the Battle.net logout endpoint. This will ensure the user is actually logged
 	 * out of their Battle.net account before returning to the website. If this is not done, Battle.net login will still
-	 * have an active session for the user and they will be auto logged into that account.
+	 * have an active session for the user, and they will be auto logged into that account.
 	 */
 	LogoutSuccessHandler logoutSuccessHandler() {
 		return (request, response, authentication) -> {
@@ -42,10 +42,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-				.authorizeRequests().anyRequest().authenticated()
-				.and().oauth2Client()
+				.authorizeRequests(authorizeRequestsSpec -> authorizeRequestsSpec.anyRequest().authenticated())
+				.oauth2Client()
 				.and().oauth2Login()
-				.and().logout().logoutSuccessHandler(logoutSuccessHandler());
+				.and().logout(logoutSpec -> logoutSpec.logoutSuccessHandler(logoutSuccessHandler()));
 	}
 
 }

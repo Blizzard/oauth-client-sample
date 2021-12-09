@@ -8,7 +8,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @since 6/17/2021
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record DifficultyCompleted(@JsonProperty("wings-of-liberty") String wingsOfLiberty,
-                                  @JsonProperty("heart-of-the-swarm") String heartOfTheSwarm) {
+public record DifficultyCompleted(
+		@JsonProperty("wings-of-liberty") String wingsOfLiberty,
+		@JsonProperty("heart-of-the-swarm") String heartOfTheSwarm
+) {
 
 }
