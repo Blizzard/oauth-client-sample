@@ -17,7 +17,7 @@ Each class and method should have documentation explaining the important informa
 This sample can be imported into an IDE and run using the `main` method in `JavaWebMVCSampleOAuthClient`.
 To use the command line, `mvn spring-boot:run` or build the jar file and run with `mvn package` and
 `java -jar target/*.jar`. This requires both Maven and Java to be installed locally. This sample
-uses Java 17, but can be compiled against Java 8/11 by changing the value in the `pom.xml`.
+uses Java 21, but can be compiled against Java 17 by changing the value in the `pom.xml`.
 
 This sample runs on `localhost:8080` and all documentation and code will reflect as such. To run
 on a different host or port, you will need to update the OAuth Client Redirect URIs using the
