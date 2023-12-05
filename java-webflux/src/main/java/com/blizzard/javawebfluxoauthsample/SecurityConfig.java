@@ -2,6 +2,7 @@ package com.blizzard.javawebfluxoauthsample;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
@@ -17,7 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @since 6/16/2021
  */
 @EnableWebFluxSecurity
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class SecurityConfig {
 
 	/**
@@ -41,13 +42,13 @@ public class SecurityConfig {
 	 * logout handler created above for redirecting users after a successful logout.
 	 */
 	@Bean
-	public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-		http
+	SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+		return http
 				.authorizeExchange(authorizeExchangeSpec -> authorizeExchangeSpec.anyExchange().authenticated())
-				.oauth2Client()
-				.and().oauth2Login()
-				.and().logout(logoutSpec -> logoutSpec.logoutSuccessHandler(logoutSuccessHandler()));
-		return http.build();
+				.oauth2Client(Customizer.withDefaults())
+				.oauth2Login(Customizer.withDefaults())
+				.logout(logoutSpec -> logoutSpec.logoutSuccessHandler(logoutSuccessHandler()))
+				.build();
 	}
 
 }

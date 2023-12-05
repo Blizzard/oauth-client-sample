@@ -1,9 +1,11 @@
 package com.blizzard.javawebmvcoauthsample;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -16,8 +18,8 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @since 6/16/2021
  */
 @EnableWebSecurity
-@Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+@Configuration(proxyBeanMethods = false)
+public class SecurityConfig {
 
 	/**
 	 * Creates a logout handler to invoke the Battle.net logout endpoint. This will ensure the user is actually logged
@@ -39,13 +41,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * Configures OAuth 2.0 Client support. Leverages OAuth 2.0 Authorization Code Grant Flow for login. And uses the
 	 * logout handler created above for redirecting users after a successful logout.
 	 */
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http
-				.authorizeRequests(authorizeRequestsSpec -> authorizeRequestsSpec.anyRequest().authenticated())
-				.oauth2Client()
-				.and().oauth2Login()
-				.and().logout(logoutSpec -> logoutSpec.logoutSuccessHandler(logoutSuccessHandler()));
+	@Bean
+	SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
+		return http
+				.authorizeRequests(authz -> authz.anyRequest().authenticated())
+				.oauth2Client(Customizer.withDefaults())
+				.oauth2Login(Customizer.withDefaults())
+				.logout(logout -> logout.logoutSuccessHandler(logoutSuccessHandler()))
+				.build();
 	}
 
 }
